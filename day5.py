@@ -9,7 +9,7 @@ crates=[""]*9 #initiallizing crates into 9 empty strings within an array (9 sect
 
 for i in range(len(a)-2,-1,-1): #
     for j in range(1,len(a[0]), 4):
-        if a[i][j].isupper():crates[j//4]+=a[i][j]
+        if a[i][j].isupper():crates[j//4]+=a[i][j] #add letter to string if found
         
 for i in b:
     values = i.split() #splits instructions into an array [eg: [[move] [3] [from] [2] [to] [8]]
@@ -17,10 +17,10 @@ for i in b:
         
     for j in range(amount): #repeat for required amount
         crates[to_crate] += crates[from_crate][-1] #add last letter from stack a string to stack b string
-        crates[from_crate] -= crates[from_crate][-1] #remove last letter from stack a
+        crates[from_crate] = crates[from_crate][:-1] #new string a = string a without last letter
 
-final_output = ''
-for i in crates:
+final_output = '' #format for requrired output
+for i in crates: 
     if i != []:
         final_output +=i[-1]
         
