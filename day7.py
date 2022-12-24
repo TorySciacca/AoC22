@@ -20,10 +20,11 @@ for command in data: #generate directory
             
             else: 
                 for i in dirs[level]:
-                    if i == command[4:]:
+                    if i == command[4:].strip():
                         #remove string
                         #add array ['new string',[]]
-                        level += 1
+                        # level += 1
+                        pass
         
         elif command[2:4] == 'ls': #list command
             pass
