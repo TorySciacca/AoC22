@@ -1,37 +1,32 @@
 "AoC Day 7 - Tory Sciacca"
 
 data = open('day7.txt','r').read().split('\n') #stores each line from the data in a variable 
-
+username = 'elf22'
 dirs = []
-path = '/'
+path = 'username/'
 
-for command in data:
+for command in data: #generate directory 
     
-    if command[0] == '$':
+    if command[0] == '$': #function
         
-        if command[3:4] == 'cd':
+        if command[2:4] == 'cd':
+            
+            if command[5] == '/': #return to main directory
+                path = 'username/'
+                print(command)
+
+            if command[5:7] == '..': #move out a level
+                pass
+        
+        elif command[2:4] == 'ls':
+            pass
+    
+    else: #directory or file
+
+        if command[:3] == 'dir':
+            pass
+            
+        if command[0].isnumeric():
             pass
         
-        elif command[3:4] == 'ls':
-            pass
-    
-    else:
-        pass
-     
-#     if l[0:4] == '$ cd':
-#         directory_name = l[4:].strip()
-#         print(directory_name)
-#         ls = False
-        
-#     elif l[0:4] == '$ ls':
-#         ls = True
-        
-#     if ls:
-#         a = l.split(' ')
-#         add_to_dir(directory_name,a[1],level)
-
-#     i += 1
-    
-#     if i == 26:
-#         break
-    
+#process data
