@@ -37,6 +37,10 @@ for command in data: #generate directory
             if not found:
                 directory.update({i:int(f[0])})
 
+def add_to_all_dirs(dir_path):
+    # dir_path
+    pass
+
 total_under_10k = sum(v for v in directory.values() if v <= 100000)
 
 print(directory)
