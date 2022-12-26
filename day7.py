@@ -2,29 +2,32 @@
 
 data = open('day7.txt','r').read().split('\n') #stores each line from the data in a variable 
 username = 'elf22'
-dirs = ['/',[]]
-path = ''
-level = 1
+
+directory = {'/':0}
+dir_path = f'/{username}'
+
+# rfind('/') #returns index of last used of /
 
 for command in data: #generate directory 
     
-    if command[0] == '$': #function
+    if command[0] == '$': #function command
         
-        if command[2:4] == 'cd':
-            
-            if command[5] == '/': #return to main directory
-                path += f'{username}/'
+        if command[2:4] == 'cd': #change directory
 
-            elif command[5:7] == '..': #move out a level
-                pass
+            if command[5:7] == '..': #move out a level
+                dir_path = dir_path[:(dir_path.rfind('/'))]
+                print(dir_path)
             
             else: 
-                for i in dirs[level]:
-                    if i == command[4:].strip():
+                pass
+                # for i in dirs:
+                #     current_dir = command[4:].strip()
+                #     if i == current_dir:
+                #         print(current_dir)
                         #remove string
                         #add array ['new string',[]]
                         # level += 1
-                        pass
+
         
         elif command[2:4] == 'ls': #list command
             pass
@@ -32,18 +35,22 @@ for command in data: #generate directory
     else: #directory or file
 
         if command[:3] == 'dir': #directory found
-            # path += f'{command[3:]}'
-            for i in dirs[level]:
-                if i == command[4:]:
+            dir_path += '/' + command[4:]
+            for i in directory:
+                if i == dir_path:
                     break
-            dirs[level].append(command[4:])
+            directory.update({dir_path:0})
             
         if command[0].isnumeric(): #file found
-            file_ = command.split()
-            dirs[level].append(file_[1])
+            pass
+            # file_ = command.split()
+            # dirs.append(file_[1])
+    
+    if command == '$ cd cmcrzdt':
+        break
         
 #test
-print(dirs)
-print(level)
+print(dir_path)
+print(directory)
 
 #process data
