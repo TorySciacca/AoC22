@@ -38,7 +38,10 @@ for command in data: #generate directory
                 directory.update({i:int(f[0])})
 
 def add_to_all_dirs(dir_path):
-    # dir_path
+    #split down path by /
+    #serch for every split path
+    #add value to other dirs
+    #use while creating dir
     pass
 
 total_under_10k = sum(v for v in directory.values() if v <= 100000)
