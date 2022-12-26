@@ -3,8 +3,8 @@
 data = open('day7.txt','r').read().split('\n') #stores each line from the data in a variable 
 username = 'elf22'
 
-directory = {'/':0}
-dir_path = f'/{username}'
+directory = {}
+dir_path = ''
 
 # rfind('/') #returns index of last used of /
 
@@ -15,11 +15,25 @@ for command in data: #generate directory
         if command[2:4] == 'cd': #change directory
 
             if command[5:7] == '..': #move out a level
-                dir_path = dir_path[:(dir_path.rfind('/'))]
-                print(dir_path)
+                current_dir_size = 0
+                
+                for i in directory:
+                    if i == dir_path:
+                        current_dir_size = directory[i]
+                                                
+                prev_dir = dir_path.rfind('/')
+                dir_path = dir_path[:prev_dir]
+                
+                for i in directory:
+                    if i == dir_path:
+                        directory.update({i:directory[i]+current_dir_size})
             
             else: 
-                pass
+                dir_path += str('/' + command[4:].strip())
+                for i in directory:
+                    if i == dir_path:
+                        break
+                directory.update({dir_path:0})
                 # for i in dirs:
                 #     current_dir = command[4:].strip()
                 #     if i == current_dir:
@@ -33,24 +47,27 @@ for command in data: #generate directory
             pass
     
     else: #directory or file
-
-        if command[:3] == 'dir': #directory found
-            dir_path += '/' + command[4:]
-            for i in directory:
-                if i == dir_path:
-                    break
-            directory.update({dir_path:0})
-            
+   
         if command[0].isnumeric(): #file found
-            pass
+            f = command.split(' ') #(f)ile
+            for i in directory:
+                if i == f[1]:
+                    break
+            directory.update({i:int(f[0])})
             # file_ = command.split()
             # dirs.append(file_[1])
     
-    if command == '$ cd cmcrzdt':
-        break
-        
+    # if command == '$ cd cmcrzdt':
+    #     break
+
+total_under_10k = 0
+
+for i in directory:
+    if directory[i] <= 10000:
+        total_under_10k += directory[i]
+
 #test
-print(dir_path)
 print(directory)
+print(total_under_10k) #solution: 1583951
 
 #process data
