@@ -5,7 +5,7 @@ username = 'elftop'
 directory = {}
 dir_path = ''
 
-def add_to_all_dirs(usage:int):
+def add_to_all_dirs(usage:int): #the brief requrires parent directories to include the child usage in the summof every directory
     f = dir_path
     
     for i in range(len(f.split('/'))):
@@ -40,7 +40,7 @@ for command in data: #generate directory
             f = command.split(' ') #(f)ile splits into usage,filename 
             add_to_all_dirs(int(f[0])) #updates every dir in path to include file usage 
                 
-total_under_10k = sum(v for v in directory.values() if v <= 100000)
+result = sum(v for v in directory.values() if v <= 100000)
 
 # print(directory)
-print(total_under_10k) #solution: 1583951
+print(f'The sum total of every directory (under 100,000) is: {result}') 
